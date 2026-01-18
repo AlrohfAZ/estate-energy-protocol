@@ -91,4 +91,12 @@ contract EstateRegistry {
     function getstableCoin() public view returns (address) {
         return stableCoin;
     }
+
+    function getRole(address wallet) public view returns (Role) {
+        return roles[wallet];
+    }
+
+    function isApproved(address wallet) public view returns (bool) {
+        return approvedHouses[wallet];
+    }
 }
