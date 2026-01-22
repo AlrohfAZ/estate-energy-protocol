@@ -15,8 +15,9 @@ A v0.1 energy protocol built on **Ethereum**, using a single estate as its speci
 - [EnergyMarketplace](#energymarketplace)
 - [UsageUnitVault](#usageunitvault)
 
-
 ## EstateRegistry
+
+The function of the EstateEnergy contract is the registeration of the estate and the houses involved in this protocol
 
 ## Table of Contents
 
@@ -31,9 +32,9 @@ A v0.1 energy protocol built on **Ethereum**, using a single estate as its speci
 
 ## Description
 
-This smart contract currently has 4 actors:
+This smart contract currently has 1 major actor that carries out all the functions:
 
 - ADMIN: The admin assigns roles to houses in the estate, there are 4 roles: Producer, Consumer, Both, and None.
-- ORACLE: The oracle validates production claims and approves minting, while enforcing the dailyTariffLimit, and dailyCapLimit
+<!-- - ORACLE: The oracle validates production claims and approves minting, while enforcing the dailyTariffLimit, and dailyCapLimit
 - PRODUCER: The producer submits production claims for validation, is minted to, and transfers EnergyTokens.
-- CONSUMER: The consumer buys EnergyTokens, and can convert them to UsageUnits for household usage.
+- CONSUMER: The consumer buys EnergyTokens, and can convert them to UsageUnits for household usage. -->

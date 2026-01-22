@@ -56,7 +56,10 @@ contract EstateRegistry {
     }
 
     // This function approves houses
-    function approveHouses(address wallet, Role role) public onlyAdmin {
+    function approveHouses(
+        address wallet,
+        Role role
+    ) public onlyActive onlyAdmin {
         require(!approvedHouses[wallet], "House already approved");
         approvedHouses[wallet] = true;
         roles[wallet] = role;
@@ -64,7 +67,7 @@ contract EstateRegistry {
     }
 
     // This function revokes houses
-    function revokeHouses(address wallet) public onlyAdmin {
+    function revokeHouses(address wallet) public onlyActive onlyAdmin {
         require(!revokedHouses[wallet], "House has been revoked");
         approvedHouses[wallet] = false;
         roles[wallet] = Role.None;
@@ -72,19 +75,19 @@ contract EstateRegistry {
     }
 
     // This function sets daily tariff
-    function setTariff(uint256 newTariff) public onlyAdmin {
+    function setTariff(uint256 newTariff) public onlyActive onlyAdmin {
         dailyTariff = newTariff;
         emit TarrifUpdated(newTariff);
     }
 
     // This function sets the cap for minting
-    function setMintCap(uint256 newCap) public onlyAdmin {
+    function setMintCap(uint256 newCap) public onlyActive onlyAdmin {
         dailyMintcap = newCap;
         emit MintCapUpdated(newCap);
     }
 
     // This function sets up the oracle
-    function setOracle(address newOracle) public onlyAdmin {
+    function setOracle(address newOracle) public onlyActive onlyAdmin {
         oracle = newOracle;
     }
 
@@ -92,11 +95,11 @@ contract EstateRegistry {
         return stableCoin;
     }
 
-    function getRole(address wallet) public view returns (Role) {
+    function getRole(address wallet) public view onlyActive returns (Role) {
         return roles[wallet];
     }
 
-    function isApproved(address wallet) public view returns (bool) {
+    function isApproved(address wallet) public view onlyActive returns (bool) {
         return approvedHouses[wallet];
     }
 }

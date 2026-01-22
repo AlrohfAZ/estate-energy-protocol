@@ -8,7 +8,7 @@ describe("EstateRegistry", function () {
   let user1;
   let user2;
 
-  const ESTATE_NAME = "GreenVille Estate";
+  const ESTATE_NAME = "OPIC Estate";
   const STABLE_COIN = ethers.ZeroAddress;
   const TREASURY = ethers.Wallet.createRandom().address;
 
@@ -53,15 +53,16 @@ describe("EstateRegistry", function () {
       await estateRegistry.approveHouses(user1.address, 3); // Role.Both = 3
 
       // No direct getter, but success = no revert
-      expect(true).to.be.true;
+      expect(await estateRegistry.isApproved(user1.address)).to.equal(true);
+      expect(await estateRegistry.getRole(user1.address)).to.equal(3);
     });
 
     it("Should emit HouseApproved event", async function () {
       await expect(
-        estateRegistry.approveHouses(user1.address, 1) // Role.Producer
+        estateRegistry.approveHouses(user1.address, 3) // Role.Both
       )
         .to.emit(estateRegistry, "HouseApproved")
-        .withArgs(user1.address, 1);
+        .withArgs(user1.address, 3);
     });
 
     it("Non-admin cannot approve a house", async function () {
@@ -78,7 +79,8 @@ describe("EstateRegistry", function () {
 
     it("Admin can revoke a house", async function () {
       await estateRegistry.revokeHouses(user1.address);
-      expect(true).to.be.true;
+      expect(await estateRegistry.isApproved(user1.address)).to.equal(false);
+      expect(await estateRegistry.getRole(user1.address)).to.equal(0);
     });
 
     it("Should emit HouseRevoked event", async function () {
@@ -130,6 +132,13 @@ describe("EstateRegistry", function () {
   describe("Stablecoin getter", function () {
     it("Should return correct stablecoin address", async function () {
       expect(await estateRegistry.getstableCoin()).to.equal(STABLE_COIN);
+    });
+  });
+
+  describe("Role getter", function () {
+    it("Should return the correct role of a given address", async function () {
+      const ROLE = await estateRegistry.getRole(user1.address);
+      expect(await estateRegistry.getRole(user1.address)).to.equal(ROLE);
     });
   });
 });
