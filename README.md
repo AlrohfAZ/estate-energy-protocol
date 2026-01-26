@@ -32,16 +32,14 @@ The function of the EstateEnergy contract is the registeration of the estate and
 
 ## Description
 
-
-
-
-## License
-- This project is licensed under MIT.
-
-
 This smart contract currently has 1 major actor that carries out all the functions:
 
 - ADMIN: The admin assigns roles to houses in the estate, there are 4 roles: Producer, Consumer, Both, and None.
 <!-- - ORACLE: The oracle validates production claims and approves minting, while enforcing the dailyTariffLimit, and dailyCapLimit
 - PRODUCER: The producer submits production claims for validation, is minted to, and transfers EnergyTokens.
 - CONSUMER: The consumer buys EnergyTokens, and can convert them to UsageUnits for household usage. -->
+
+
+
+## License
+- This project is licensed under MIT.
