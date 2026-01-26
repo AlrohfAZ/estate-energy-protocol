@@ -5,6 +5,7 @@ A v0.1 energy protocol built on **Ethereum**, using a single estate as its speci
 ## Table of Contents
 
 - [Contracts](#contracts)
+- [License](#license)
 
 ## Contracts
 
@@ -28,9 +29,15 @@ The function of the EstateEnergy contract is the registeration of the estate and
 - [Usage](#usage)
 - [Contract Details](#contract-details)
 - [Testing](#testing)
-- [License](#license)
 
 ## Description
+
+
+
+
+## License
+- This project is licensed under MIT.
+
 
 This smart contract currently has 1 major actor that carries out all the functions:
 
