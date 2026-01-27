@@ -102,4 +102,22 @@ contract EstateRegistry {
     function isApproved(address wallet) public view onlyActive returns (bool) {
         return approvedHouses[wallet];
     }
+
+    function getProtocolState() public view returns (ProtocolState) {
+        return protocolState;
+    }
+
+    function getMintCap() public view returns (uint256) {
+        return dailyMintcap;
+    }
+
+    function isProducer(address wallet) external view returns (bool) {
+        Role r = roles[wallet];
+        return r == Role.Producer || r == Role.Both;
+    }
+
+    function isProtocolActive() external view returns (bool) {
+        require(protocolState == ProtocolState.Active, "Protocol is inactive");
+        return true;
+    }
 }
