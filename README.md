@@ -5,6 +5,7 @@ A v0.1 energy protocol built on **Ethereum**, using a single estate as its speci
 ## Table of Contents
 
 - [Contracts](#contracts)
+- [License](#license)
 
 ## Contracts
 
@@ -28,7 +29,6 @@ The function of the EstateEnergy contract is the registeration of the estate and
 - [Usage](#usage)
 - [Contract Details](#contract-details)
 - [Testing](#testing)
-- [License](#license)
 
 ## Description
 
@@ -38,3 +38,8 @@ This smart contract currently has 1 major actor that carries out all the functio
 <!-- - ORACLE: The oracle validates production claims and approves minting, while enforcing the dailyTariffLimit, and dailyCapLimit
 - PRODUCER: The producer submits production claims for validation, is minted to, and transfers EnergyTokens.
 - CONSUMER: The consumer buys EnergyTokens, and can convert them to UsageUnits for household usage. -->
+
+
+
+## License
+- This project is licensed under MIT.
