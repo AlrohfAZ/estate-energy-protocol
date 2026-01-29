@@ -55,7 +55,12 @@ contract EstateRegistry {
         _;
     }
 
-    // This function approves houses
+    /**
+     * @dev Approves houses and assigns roles.
+     * @param wallet Address of the house to be proved.
+     * @param role Assigned on approval of address.
+     */
+
     function approveHouses(
         address wallet,
         Role role
@@ -66,7 +71,11 @@ contract EstateRegistry {
         emit HouseApproved(wallet, role);
     }
 
-    // This function revokes houses
+    /**
+     * @dev Revokes a house and is not capable of role assignment.
+     * @param wallet Address of the house to be revoked.
+     */
+
     function revokeHouses(address wallet) public onlyActive onlyAdmin {
         require(!revokedHouses[wallet], "House has been revoked");
         approvedHouses[wallet] = false;
@@ -74,50 +83,94 @@ contract EstateRegistry {
         emit HouseRevoked(wallet);
     }
 
-    // This function sets daily tariff
+    /**
+     * @dev Sets dailyTariff to be used for the protocol.
+     * @param newTariff The new value to be set for the tariff.
+     */
     function setTariff(uint256 newTariff) public onlyActive onlyAdmin {
         dailyTariff = newTariff;
         emit TarrifUpdated(newTariff);
     }
 
-    // This function sets the cap for minting
+    /**
+     * @dev Sets the mintCap to be used by the protocol.
+     * @param newCap The new value to be set for the mintCap.
+     */
     function setMintCap(uint256 newCap) public onlyActive onlyAdmin {
         dailyMintcap = newCap;
         emit MintCapUpdated(newCap);
     }
 
-    // This function sets up the oracle
+    /**
+     * @dev Sets the address for the Oracle used in the protocol.
+     * @param newOracle The new address to be set oracle..
+     */
     function setOracle(address newOracle) public onlyActive onlyAdmin {
         oracle = newOracle;
     }
 
+    /**
+     * @dev A simple getter function for the StableCoin.
+     * @return The address of the stablecoin.
+     */
     function getstableCoin() public view returns (address) {
         return stableCoin;
     }
 
+    /**
+     * @dev A simple getter function to get the role of a house.
+     * @param wallet The address of the house to be queried.
+     * @return The role of the house.
+     */
     function getRole(address wallet) public view onlyActive returns (Role) {
         return roles[wallet];
     }
 
+    /**
+     * @dev A simple getter function to get the approval status of a house.
+     * @param wallet The address of the house to be queried.
+     * @return True or False.
+     */
     function isApproved(address wallet) public view onlyActive returns (bool) {
         return approvedHouses[wallet];
     }
 
+    /**
+     * @dev A simple getter function to get the state of the protocol.
+     * @return The Protocol state.
+     */
     function getProtocolState() public view returns (ProtocolState) {
         return protocolState;
     }
 
+    /**
+     * @dev A simple getter function to get the mint cap.
+     * @return The mint cap.
+     */
     function getMintCap() public view returns (uint256) {
         return dailyMintcap;
     }
 
+    /**
+     * @dev A simple view function to check if an address is specifically a producer.
+     * @param wallet The address of the house to be queried.
+     * @return True or False.
+     */
     function isProducer(address wallet) external view returns (bool) {
         Role r = roles[wallet];
         return r == Role.Producer || r == Role.Both;
     }
 
+    /**
+     * @dev A simple view function to specifically check if the protocol is active.
+     * @return True or False.
+     */
     function isProtocolActive() external view returns (bool) {
         require(protocolState == ProtocolState.Active, "Protocol is inactive");
         return true;
+    }
+
+    function getOracle() public view returns (address) {
+        return oracle;
     }
 }

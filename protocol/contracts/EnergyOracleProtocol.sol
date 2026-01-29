@@ -31,6 +31,9 @@ contract EnergyOracleProtocol {
         _;
     }
 
+    /**
+     * @dev Submits claim of production by an approved house with the Producer Role .
+     */
     function submitClaim() public {
         require(estateRegistry.isProtocolActive(), "Protocol is inactive");
         estateRegistry.isApproved(msg.sender);
@@ -50,6 +53,10 @@ contract EnergyOracleProtocol {
         emit ClaimSubmitted(msg.sender, roundId);
     }
 
+    /**
+     * @dev Only the oracle validates the claim.
+     * @param _address The address of the house that submits a production claim.
+     */
     function validation(address _address) public onlyOracle {
         require(claim[_address] == ClaimState.Submitted);
         require(
@@ -61,12 +68,19 @@ contract EnergyOracleProtocol {
         emit ClaimValidated(_address, roundId);
     }
 
-    function approveMint(address _address) public {
+    /**
+     * @dev Approves mint after validation, called by rhe TokenContract.
+     * @param _address The address of the house to be minted to.
+     */
+    function approveMint(address _address) public onlyOracle {
         require(claim[_address] == ClaimState.Validated);
         claim[_address] = ClaimState.Consumed;
         emit ClaimConsumed(_address, roundId);
     }
 
+    /**
+     * @dev Oracle resets the cycle daily.
+     */
     function resetCycle() public onlyOracle {
         roundId += 1;
         totalValidatedPerDay = 0;
