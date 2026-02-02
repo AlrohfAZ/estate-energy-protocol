@@ -12,7 +12,7 @@ A v0.1 energy protocol built on **Ethereum**, using a single estate as its speci
 - This protocol consists of 4 contracts:
 - [EstateRegistry](#estateregistry)
 - [EnergyOracleProtocol](#energyoracleprotocol)
-- [kWhToken](#kwhtoken)
+- [EnergyToken](#energytoken)
 - [EnergyMarketplace](#energymarketplace)
 - [UsageUnitVault](#usageunitvault)
 
@@ -39,7 +39,6 @@ This smart contract currently has 1 major actor that carries out all the functio
 - PRODUCER: The producer submits production claims for validation, is minted to, and transfers EnergyTokens.
 - CONSUMER: The consumer buys EnergyTokens, and can convert them to UsageUnits for household usage. -->
 
-
-
 ## License
+
 - This project is licensed under MIT.
