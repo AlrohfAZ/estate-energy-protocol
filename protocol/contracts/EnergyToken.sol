@@ -12,7 +12,21 @@ contract EnergyToken {
     event EnergyTransferred(address from, address to, uint256 amount);
     event EnergyConsumed(address consumer, uint256 amount);
 
-    function mint(uint256 amount) public payable {}
+    EstateRegistry public estateRegistry;
+    EnergyOracleProtocol public energyOracleProtocol;
+
+    constructor(
+        EstateRegistry _estateRegistry,
+        EnergyOracleProtocol _energyOracleProtocol
+    ) {
+        estateRegistry = EstateRegistry(_estateRegistry);
+        energyOracleProtocol = EnergyOracleProtocol(_energyOracleProtocol);
+    }
+
+    function mint(uint256 amount) public payable {
+        require(estateRegistry.isProducer(msg.sender));
+        require(amount < estateRegistry.getMintCap());
+    }
 
     function transferTo(address to, uint256 amount) public payable {}
 
